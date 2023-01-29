@@ -1,10 +1,71 @@
 public class Runner {
     public static void main(String... args) {
-        runTests();
+        runListTests();
+        runHashTests();
+    }
+
+    //runs tests over List functionality
+    private static void runListTests() {
+        System.out.println("Testing List");
+        VariableList<Integer> list = new VariableList<>();
+        //setting list to nearly resize itself
+        for (int i = 0; i < 9; i++) {
+            list.add(i);
+        }
+
+        //testing add
+        String method = "add()";
+        int test = 1;
+        list.add(1);
+        int expected = 10;
+        if (list.size() == expected) {
+            printTest(test, method, true);
+        } else {
+            printTest(test, method, false);
+        }
+
+        //testing get
+        test++;
+        method = "get()";
+        expected = 1;
+        if (list.get(9) == expected) {
+            printTest(test, method, true);
+        } else {
+            printTest(test, method, false);
+        }
+
+        //testing remove() on index
+        test++;
+        expected = 1;
+        method = "remove()";
+        if (list.remove(9) == expected) {
+            printTest(test, method, true);
+        } else {
+            printTest(test, method, false);
+        }
+
+        //testing remove() on value
+        test++;
+        method = "remove()";
+        boolean exp = true;
+        if (list.remove(Integer.valueOf(8)) == exp) {
+            printTest(test, method, true);
+        } else {
+            printTest(test, method, false);
+        }
+
+        test++;
+        expected = 8;
+        if (list.size() == expected) {
+            printTest(test, method, true);
+        } else {
+            printTest(test, method, false);
+        }
     }
 
     //runs tests over HashTable functionality
-    private static void runTests() {
+    private static void runHashTests() {
+        System.out.println("Testing hash table");
         HashTable<Integer, Integer> table = new HashTable<>();
         //setting table to nearly resize itself (with 0.75 load factor)
         for (int i = 0; i < 7; i++) {
